@@ -501,6 +501,9 @@ impl crate::Resource for Endpoints {
     const GROUP: &'static str = "";
     const KIND: &'static str = "Endpoints";
     const VERSION: &'static str = "v1";
+    const PLURAL_NAME: &'static str = endpoints;
+    const NAMESPACED: bool = true;
+    type Scope = crate::NamespaceResourceScope;
 }
 
 impl crate::ListableResource for Endpoints {

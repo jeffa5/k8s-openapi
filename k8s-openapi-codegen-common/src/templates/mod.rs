@@ -89,6 +89,8 @@ pub(crate) struct ResourceMetadata<'a> {
 	pub(crate) version: &'a str,
 	pub(crate) list_kind: Option<&'a str>,
 	pub(crate) metadata_ty: Option<&'a str>,
+	pub(crate) plural_name: &'a str,
+	pub(crate) namespaced: bool,
 }
 
 #[derive(Clone, Copy)]

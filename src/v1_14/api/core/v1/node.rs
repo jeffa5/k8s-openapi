@@ -1031,6 +1031,9 @@ impl crate::Resource for Node {
     const GROUP: &'static str = "";
     const KIND: &'static str = "Node";
     const VERSION: &'static str = "v1";
+    const PLURAL_NAME: &'static str = nodes;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl crate::ListableResource for Node {

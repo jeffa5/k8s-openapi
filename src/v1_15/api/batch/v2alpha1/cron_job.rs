@@ -685,6 +685,9 @@ impl crate::Resource for CronJob {
     const GROUP: &'static str = "batch";
     const KIND: &'static str = "CronJob";
     const VERSION: &'static str = "v2alpha1";
+    const PLURAL_NAME: &'static str = cronjobs;
+    const NAMESPACED: bool = true;
+    type Scope = crate::NamespaceResourceScope;
 }
 
 impl crate::ListableResource for CronJob {

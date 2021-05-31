@@ -27,6 +27,9 @@ impl crate::Resource for Status {
     const GROUP: &'static str = "";
     const KIND: &'static str = "Status";
     const VERSION: &'static str = "v1";
+    const PLURAL_NAME: &'static str = ;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl crate::Metadata for Status {

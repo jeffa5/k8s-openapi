@@ -503,6 +503,9 @@ impl crate::Resource for CSIStorageCapacity {
     const GROUP: &'static str = "storage.k8s.io";
     const KIND: &'static str = "CSIStorageCapacity";
     const VERSION: &'static str = "v1beta1";
+    const PLURAL_NAME: &'static str = csistoragecapacities;
+    const NAMESPACED: bool = true;
+    type Scope = crate::NamespaceResourceScope;
 }
 
 impl crate::ListableResource for CSIStorageCapacity {

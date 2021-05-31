@@ -519,6 +519,16 @@ pub trait Resource {
 
     /// The version of the resource.
     const VERSION: &'static str;
+
+    /// The plural name of the resource, used in constructing URLs.
+    const PLURAL_NAME: &'static str;
+
+    /// If true, the resource is namespace-scoped, otherwise it's cluster-scoped.
+    const NAMESPACED: bool;
+
+    /// An alternative way of indicating whether the resource is namespace-scoped or cluster-scoped.
+    /// If `NAMESPACED` is `true`, this is [`NamespaceResourceScope`], otherwise it's [`ClusterResourceScope`].
+    type Scope: ResourceScope;
 }
 
 /// A trait applied to all Kubernetes resources that can be part of a corresponding list.
@@ -572,6 +582,17 @@ pub fn kind<T>(_: &T) -> &'static str where T: Resource {
 pub fn version<T>(_: &T) -> &'static str where T: Resource {
     <T as Resource>::VERSION
 }
+
+/// The scope of a [`Resource`].
+pub trait ResourceScope {}
+
+/// Indicates that a [`Resource`] is cluster-scoped.
+pub struct ClusterResourceScope {}
+impl ResourceScope for ClusterResourceScope {}
+
+/// Indicates that a [`Resource`] is namespace-scoped.
+pub struct NamespaceResourceScope {}
+impl ResourceScope for NamespaceResourceScope {}
 
 /// The type of errors returned by the Kubernetes API functions that prepare the HTTP request.
 #[cfg(feature = "api")]

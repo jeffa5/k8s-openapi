@@ -538,6 +538,9 @@ impl crate::Resource for CustomResourceDefinition {
     const GROUP: &'static str = "apiextensions.k8s.io";
     const KIND: &'static str = "CustomResourceDefinition";
     const VERSION: &'static str = "v1beta1";
+    const PLURAL_NAME: &'static str = customresourcedefinitions;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl crate::ListableResource for CustomResourceDefinition {

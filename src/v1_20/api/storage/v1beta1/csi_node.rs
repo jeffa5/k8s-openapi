@@ -374,6 +374,9 @@ impl crate::Resource for CSINode {
     const GROUP: &'static str = "storage.k8s.io";
     const KIND: &'static str = "CSINode";
     const VERSION: &'static str = "v1beta1";
+    const PLURAL_NAME: &'static str = csinodes;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl crate::ListableResource for CSINode {

@@ -490,6 +490,9 @@ impl crate::Resource for Lease {
     const GROUP: &'static str = "coordination.k8s.io";
     const KIND: &'static str = "Lease";
     const VERSION: &'static str = "v1";
+    const PLURAL_NAME: &'static str = leases;
+    const NAMESPACED: bool = true;
+    type Scope = crate::NamespaceResourceScope;
 }
 
 impl crate::ListableResource for Lease {

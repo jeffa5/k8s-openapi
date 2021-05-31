@@ -790,6 +790,9 @@ impl crate::Resource for Scale {
     const GROUP: &'static str = "autoscaling";
     const KIND: &'static str = "Scale";
     const VERSION: &'static str = "v1";
+    const PLURAL_NAME: &'static str = ;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl crate::Metadata for Scale {

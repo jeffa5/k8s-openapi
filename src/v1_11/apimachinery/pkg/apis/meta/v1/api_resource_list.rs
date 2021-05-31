@@ -15,6 +15,9 @@ impl crate::Resource for APIResourceList {
     const GROUP: &'static str = "";
     const KIND: &'static str = "APIResourceList";
     const VERSION: &'static str = "v1";
+    const PLURAL_NAME: &'static str = ;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl<'de> crate::serde::Deserialize<'de> for APIResourceList {

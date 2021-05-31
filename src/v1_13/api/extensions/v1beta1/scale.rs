@@ -598,6 +598,9 @@ impl crate::Resource for Scale {
     const GROUP: &'static str = "extensions";
     const KIND: &'static str = "Scale";
     const VERSION: &'static str = "v1beta1";
+    const PLURAL_NAME: &'static str = ;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl crate::Metadata for Scale {

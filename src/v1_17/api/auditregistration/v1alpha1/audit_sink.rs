@@ -373,6 +373,9 @@ impl crate::Resource for AuditSink {
     const GROUP: &'static str = "auditregistration.k8s.io";
     const KIND: &'static str = "AuditSink";
     const VERSION: &'static str = "v1alpha1";
+    const PLURAL_NAME: &'static str = auditsinks;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl crate::ListableResource for AuditSink {

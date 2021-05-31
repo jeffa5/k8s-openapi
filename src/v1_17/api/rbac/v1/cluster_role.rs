@@ -365,6 +365,9 @@ impl crate::Resource for ClusterRole {
     const GROUP: &'static str = "rbac.authorization.k8s.io";
     const KIND: &'static str = "ClusterRole";
     const VERSION: &'static str = "v1";
+    const PLURAL_NAME: &'static str = clusterroles;
+    const NAMESPACED: bool = false;
+    type Scope = crate::ClusterResourceScope;
 }
 
 impl crate::ListableResource for ClusterRole {

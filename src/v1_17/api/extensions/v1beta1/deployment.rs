@@ -685,6 +685,9 @@ impl crate::Resource for Deployment {
     const GROUP: &'static str = "extensions";
     const KIND: &'static str = "Deployment";
     const VERSION: &'static str = "v1beta1";
+    const PLURAL_NAME: &'static str = deployments;
+    const NAMESPACED: bool = true;
+    type Scope = crate::NamespaceResourceScope;
 }
 
 impl crate::ListableResource for Deployment {
