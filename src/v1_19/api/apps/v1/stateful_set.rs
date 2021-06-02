@@ -687,7 +687,7 @@ impl crate::Resource for StatefulSet {
     const GROUP: &'static str = "apps";
     const KIND: &'static str = "StatefulSet";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = statefulsets;
+    const PLURAL_NAME: Option<&'static str> = Some("statefulsets");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

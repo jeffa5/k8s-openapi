@@ -591,7 +591,7 @@ impl crate::Resource for CertificateSigningRequest {
     const GROUP: &'static str = "certificates.k8s.io";
     const KIND: &'static str = "CertificateSigningRequest";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = certificatesigningrequests;
+    const PLURAL_NAME: Option<&'static str> = Some("certificatesigningrequests");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

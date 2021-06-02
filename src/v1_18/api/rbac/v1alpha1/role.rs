@@ -478,7 +478,7 @@ impl crate::Resource for Role {
     const GROUP: &'static str = "rbac.authorization.k8s.io";
     const KIND: &'static str = "Role";
     const VERSION: &'static str = "v1alpha1";
-    const PLURAL_NAME: &'static str = roles;
+    const PLURAL_NAME: Option<&'static str> = Some("roles");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

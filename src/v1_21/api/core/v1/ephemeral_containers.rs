@@ -210,9 +210,9 @@ impl crate::Resource for EphemeralContainers {
     const GROUP: &'static str = "";
     const KIND: &'static str = "EphemeralContainers";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = ;
+    const PLURAL_NAME: Option<&'static str> = None;
     const NAMESPACED: bool = false;
-    type Scope = crate::ClusterResourceScope;
+    type Scope = crate::OtherResourceScope;
 }
 
 impl crate::Metadata for EphemeralContainers {

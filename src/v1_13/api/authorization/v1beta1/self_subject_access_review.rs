@@ -55,7 +55,7 @@ impl crate::Resource for SelfSubjectAccessReview {
     const GROUP: &'static str = "authorization.k8s.io";
     const KIND: &'static str = "SelfSubjectAccessReview";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = ;
+    const PLURAL_NAME: Option<&'static str> = Some("selfsubjectaccessreviews");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

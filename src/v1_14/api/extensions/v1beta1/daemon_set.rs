@@ -685,7 +685,7 @@ impl crate::Resource for DaemonSet {
     const GROUP: &'static str = "extensions";
     const KIND: &'static str = "DaemonSet";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = daemonsets;
+    const PLURAL_NAME: Option<&'static str> = Some("daemonsets");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

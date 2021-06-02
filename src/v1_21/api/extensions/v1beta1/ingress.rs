@@ -673,7 +673,7 @@ impl crate::Resource for Ingress {
     const GROUP: &'static str = "extensions";
     const KIND: &'static str = "Ingress";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = ingresses;
+    const PLURAL_NAME: Option<&'static str> = Some("ingresses");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

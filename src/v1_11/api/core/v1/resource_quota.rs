@@ -685,7 +685,7 @@ impl crate::Resource for ResourceQuota {
     const GROUP: &'static str = "";
     const KIND: &'static str = "ResourceQuota";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = resourcequotas;
+    const PLURAL_NAME: Option<&'static str> = Some("resourcequotas");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

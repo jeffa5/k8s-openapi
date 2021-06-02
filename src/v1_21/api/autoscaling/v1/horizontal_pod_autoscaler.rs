@@ -673,7 +673,7 @@ impl crate::Resource for HorizontalPodAutoscaler {
     const GROUP: &'static str = "autoscaling";
     const KIND: &'static str = "HorizontalPodAutoscaler";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = horizontalpodautoscalers;
+    const PLURAL_NAME: Option<&'static str> = Some("horizontalpodautoscalers");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

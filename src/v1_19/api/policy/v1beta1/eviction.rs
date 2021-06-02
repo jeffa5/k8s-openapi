@@ -66,9 +66,9 @@ impl crate::Resource for Eviction {
     const GROUP: &'static str = "policy";
     const KIND: &'static str = "Eviction";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = ;
+    const PLURAL_NAME: Option<&'static str> = None;
     const NAMESPACED: bool = false;
-    type Scope = crate::ClusterResourceScope;
+    type Scope = crate::OtherResourceScope;
 }
 
 impl crate::Metadata for Eviction {

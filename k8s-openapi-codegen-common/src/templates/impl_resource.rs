@@ -11,7 +11,8 @@ pub(crate) fn generate(
 	let type_generics_type = generics.type_part.map(|part| format!("<{}>", part)).unwrap_or_default();
 	let type_generics_where = generics.where_part.map(|part| format!(" where {}", part)).unwrap_or_default();
 
-	let scope = if resource_metadata.namespaced { "NamespaceResourceScope" } else { "ClusterResourceScope" };
+	let (plural_name, scope) = resource_metadata.plural_name_and_scope;
+	let namespaced = scope == "Namespace";
 
 	writeln!(
 		writer,
@@ -25,8 +26,8 @@ pub(crate) fn generate(
 		group = resource_metadata.group,
 		kind = resource_metadata.kind,
 		version = resource_metadata.version,
-		plural_name = resource_metadata.plural_name,
-		namespaced = resource_metadata.namespaced,
+		plural_name = plural_name,
+		namespaced = namespaced,
 		scope = scope,
 	)?;
 

@@ -551,7 +551,7 @@ impl crate::Resource for PriorityLevelConfiguration {
     const GROUP: &'static str = "flowcontrol.apiserver.k8s.io";
     const KIND: &'static str = "PriorityLevelConfiguration";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = prioritylevelconfigurations;
+    const PLURAL_NAME: Option<&'static str> = Some("prioritylevelconfigurations");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

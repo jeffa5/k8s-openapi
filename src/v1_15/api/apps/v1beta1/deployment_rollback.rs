@@ -125,9 +125,9 @@ impl crate::Resource for DeploymentRollback {
     const GROUP: &'static str = "apps";
     const KIND: &'static str = "DeploymentRollback";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = ;
+    const PLURAL_NAME: Option<&'static str> = None;
     const NAMESPACED: bool = false;
-    type Scope = crate::ClusterResourceScope;
+    type Scope = crate::OtherResourceScope;
 }
 
 impl<'de> crate::serde::Deserialize<'de> for DeploymentRollback {

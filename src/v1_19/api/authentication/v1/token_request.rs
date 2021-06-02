@@ -66,9 +66,9 @@ impl crate::Resource for TokenRequest {
     const GROUP: &'static str = "authentication.k8s.io";
     const KIND: &'static str = "TokenRequest";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = ;
+    const PLURAL_NAME: Option<&'static str> = None;
     const NAMESPACED: bool = false;
-    type Scope = crate::ClusterResourceScope;
+    type Scope = crate::OtherResourceScope;
 }
 
 impl crate::Metadata for TokenRequest {

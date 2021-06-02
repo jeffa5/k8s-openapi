@@ -353,8 +353,7 @@ pub fn run(
 				&template_properties,
 			)?;
 
-			let mut plural_name = None;
-			let mut namespaced = None;
+			let mut plural_name_and_scope = None;
 
 			if !definition.kubernetes_group_kind_versions.is_empty() {
 				let mut kubernetes_group_kind_versions: Vec<_> = definition.kubernetes_group_kind_versions.iter().collect();
@@ -396,28 +395,39 @@ pub fn run(
 							state.handle_operation_types(operation_optional_parameters_name.as_deref(), operation_result_name.as_deref())?;
 							run_result.num_generated_apis += 1;
 
+							// If this is a CRUD operation, use it to determine the resource's namespaced-ness and plural name.
+							match operation.kubernetes_action {
+								Some(swagger20::KubernetesAction::Delete) |
+								Some(swagger20::KubernetesAction::Get) |
+								Some(swagger20::KubernetesAction::Post) |
+								Some(swagger20::KubernetesAction::Put) => (),
+								_ => continue,
+							}
 							if let Some(rest) = operation.path.strip_prefix(&expected_path_prefix) {
-								let (rest, namespaced_) =
+								let (rest, scope_) =
 									if let Some(rest) = rest.strip_prefix("namespaces/{namespace}/") {
-										(rest, true)
+										(rest, "Namespace")
 									}
 									else {
-										(rest, false)
+										(rest, "Cluster")
 									};
-								if let Some((plural_name_, "{name}")) = rest.split_once('/') {
-									if plural_name.is_none() {
-										plural_name = Some(plural_name_.to_owned());
-									}
-									else if plural_name.as_deref() != Some(plural_name_) {
+								let plural_name_ = match rest.split_once('/') {
+									Some((plural_name, "{name}")) => format!("Some({:?})", plural_name),
+									Some(_) => continue,
+									None => format!("Some({:?})", rest),
+								};
+
+								if let Some((plural_name, scope)) = &plural_name_and_scope {
+									if *plural_name != plural_name_ {
 										return Err(format!("{} was inferred to have multiple plural_names {:?} and {:?}", definition_path, plural_name, plural_name_).into());
 									}
 
-									if namespaced.is_none() {
-										namespaced = Some(namespaced_);
+									if *scope != scope_ {
+										return Err(format!("{} was inferred to have multiple scopes {:?} and {:?}", definition_path, scope, scope_).into());
 									}
-									else if namespaced != Some(namespaced_) {
-										return Err(format!("{} was inferred as both cluster-scoped and namespace-scoped", definition_path).into());
-									}
+								}
+								else {
+									plural_name_and_scope = Some((plural_name_, scope_));
 								}
 							}
 						}
@@ -431,12 +441,10 @@ pub fn run(
 				*operations = operations_by_gkv.into_iter().flat_map(|(_, operations)| operations).collect();
 			}
 
-			let template_resource_metadata = match (&resource_metadata, &metadata_ty, plural_name.as_deref(), namespaced) {
+			let template_resource_metadata = match (&resource_metadata, &metadata_ty) {
 				(
 					Some((api_version, group, kind, version, list_kind)),
 					Some((metadata_ty, templates::PropertyRequired::Required)),
-					plural_name,
-					namespaced,
 				) => Some(templates::ResourceMetadata {
 					api_version,
 					group,
@@ -444,25 +452,16 @@ pub fn run(
 					version,
 					list_kind: list_kind.as_deref(),
 					metadata_ty: Some(metadata_ty),
-					plural_name: plural_name.unwrap_or_else(|| {
-						eprintln!("===== plural name of definition {} could not be inferred", definition_path);
-						""
-					}),
-					namespaced: namespaced.unwrap_or_else(|| {
-						eprintln!("===== scope of definition {} could not be inferred", definition_path);
-						false
-					}),
+					plural_name_and_scope: plural_name_and_scope.as_ref().map_or(("None", "Other"), |(plural_name, scope)| (&**plural_name, scope)),
 				}),
 
-				(Some(_), Some((_, templates::PropertyRequired::Optional)), _, _) |
-				(Some(_), Some((_, templates::PropertyRequired::OptionalDefault)), _, _) =>
+				(Some(_), Some((_, templates::PropertyRequired::Optional))) |
+				(Some(_), Some((_, templates::PropertyRequired::OptionalDefault))) =>
 					return Err(format!("definition {} has optional metadata", definition_path).into()),
 
 				(
 					Some((api_version, group, kind, version, list_kind)),
 					None,
-					plural_name,
-					namespaced,
 				) => Some(templates::ResourceMetadata {
 					api_version,
 					group,
@@ -470,20 +469,10 @@ pub fn run(
 					version,
 					list_kind: list_kind.as_deref(),
 					metadata_ty: None,
-					plural_name: plural_name.unwrap_or_else(|| {
-						eprintln!("===== plural name of definition {} could not be inferred", definition_path);
-						""
-					}),
-					namespaced: namespaced.unwrap_or_else(|| {
-						eprintln!("===== scope of definition {} could not be inferred", definition_path);
-						false
-					}),
+					plural_name_and_scope: plural_name_and_scope.as_ref().map_or(("None", "Other"), |(plural_name, scope)| (&**plural_name, scope)),
 				}),
 
-				// (Some(_), _, None, _) => return Err(format!("plural name of definition {} could not be inferred", definition_path).into()),
-				// (Some(_), _, _, None) => return Err(format!("scope of definition {} could not be inferred", definition_path).into()),
-
-				(None, _, _, _) => None,
+				(None, _) => None,
 			};
 
 			if let Some(template_resource_metadata) = &template_resource_metadata {
@@ -660,8 +649,7 @@ pub fn run(
 				version: "<T as crate::Resource>::VERSION",
 				list_kind: None,
 				metadata_ty: Some(&metadata_rust_type),
-				plural_name: r#""""#,
-				namespaced: false,
+				plural_name_and_scope: ("None", "Other"),
 			};
 
 			templates::r#struct::generate(

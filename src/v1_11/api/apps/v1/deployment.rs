@@ -685,7 +685,7 @@ impl crate::Resource for Deployment {
     const GROUP: &'static str = "apps";
     const KIND: &'static str = "Deployment";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = deployments;
+    const PLURAL_NAME: Option<&'static str> = Some("deployments");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

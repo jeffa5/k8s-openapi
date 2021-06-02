@@ -685,7 +685,7 @@ impl crate::Resource for ReplicaSet {
     const GROUP: &'static str = "apps";
     const KIND: &'static str = "ReplicaSet";
     const VERSION: &'static str = "v1beta2";
-    const PLURAL_NAME: &'static str = replicasets;
+    const PLURAL_NAME: Option<&'static str> = Some("replicasets");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

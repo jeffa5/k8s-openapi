@@ -493,7 +493,7 @@ impl crate::Resource for ControllerRevision {
     const GROUP: &'static str = "apps";
     const KIND: &'static str = "ControllerRevision";
     const VERSION: &'static str = "v1beta2";
-    const PLURAL_NAME: &'static str = controllerrevisions;
+    const PLURAL_NAME: Option<&'static str> = Some("controllerrevisions");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

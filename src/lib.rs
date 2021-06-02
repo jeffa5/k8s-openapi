@@ -521,7 +521,7 @@ pub trait Resource {
     const VERSION: &'static str;
 
     /// The plural name of the resource, used in constructing URLs.
-    const PLURAL_NAME: &'static str;
+    const PLURAL_NAME: Option<&'static str>;
 
     /// If true, the resource is namespace-scoped, otherwise it's cluster-scoped.
     const NAMESPACED: bool;
@@ -593,6 +593,10 @@ impl ResourceScope for ClusterResourceScope {}
 /// Indicates that a [`Resource`] is namespace-scoped.
 pub struct NamespaceResourceScope {}
 impl ResourceScope for NamespaceResourceScope {}
+
+/// Indicates that a [`Resource`] is neither cluster-scoped nor namespace-scoped.
+pub struct OtherResourceScope {}
+impl ResourceScope for OtherResourceScope {}
 
 /// The type of errors returned by the Kubernetes API functions that prepare the HTTP request.
 #[cfg(feature = "api")]

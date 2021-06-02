@@ -490,7 +490,7 @@ impl crate::Resource for NetworkPolicy {
     const GROUP: &'static str = "extensions";
     const KIND: &'static str = "NetworkPolicy";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = networkpolicies;
+    const PLURAL_NAME: Option<&'static str> = Some("networkpolicies");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

@@ -484,7 +484,7 @@ impl crate::Resource for EndpointSlice {
     const GROUP: &'static str = "discovery.k8s.io";
     const KIND: &'static str = "EndpointSlice";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = endpointslices;
+    const PLURAL_NAME: Option<&'static str> = Some("endpointslices");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

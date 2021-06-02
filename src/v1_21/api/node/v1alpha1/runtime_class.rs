@@ -362,7 +362,7 @@ impl crate::Resource for RuntimeClass {
     const GROUP: &'static str = "node.k8s.io";
     const KIND: &'static str = "RuntimeClass";
     const VERSION: &'static str = "v1alpha1";
-    const PLURAL_NAME: &'static str = runtimeclasses;
+    const PLURAL_NAME: Option<&'static str> = Some("runtimeclasses");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

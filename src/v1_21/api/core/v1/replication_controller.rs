@@ -673,7 +673,7 @@ impl crate::Resource for ReplicationController {
     const GROUP: &'static str = "";
     const KIND: &'static str = "ReplicationController";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = replicationcontrollers;
+    const PLURAL_NAME: Option<&'static str> = Some("replicationcontrollers");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

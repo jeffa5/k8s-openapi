@@ -673,7 +673,7 @@ impl crate::Resource for PersistentVolumeClaim {
     const GROUP: &'static str = "";
     const KIND: &'static str = "PersistentVolumeClaim";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = persistentvolumeclaims;
+    const PLURAL_NAME: Option<&'static str> = Some("persistentvolumeclaims");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

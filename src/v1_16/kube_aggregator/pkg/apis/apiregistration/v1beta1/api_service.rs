@@ -550,7 +550,7 @@ impl crate::Resource for APIService {
     const GROUP: &'static str = "apiregistration.k8s.io";
     const KIND: &'static str = "APIService";
     const VERSION: &'static str = "v1beta1";
-    const PLURAL_NAME: &'static str = apiservices;
+    const PLURAL_NAME: Option<&'static str> = Some("apiservices");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

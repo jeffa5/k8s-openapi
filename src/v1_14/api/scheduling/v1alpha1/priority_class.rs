@@ -380,7 +380,7 @@ impl crate::Resource for PriorityClass {
     const GROUP: &'static str = "scheduling.k8s.io";
     const KIND: &'static str = "PriorityClass";
     const VERSION: &'static str = "v1alpha1";
-    const PLURAL_NAME: &'static str = priorityclasses;
+    const PLURAL_NAME: Option<&'static str> = Some("priorityclasses");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

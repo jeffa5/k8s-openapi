@@ -544,7 +544,7 @@ impl crate::Resource for Namespace {
     const GROUP: &'static str = "";
     const KIND: &'static str = "Namespace";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = namespaces;
+    const PLURAL_NAME: Option<&'static str> = Some("namespaces");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

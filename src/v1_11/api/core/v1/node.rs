@@ -1031,7 +1031,7 @@ impl crate::Resource for Node {
     const GROUP: &'static str = "";
     const KIND: &'static str = "Node";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = nodes;
+    const PLURAL_NAME: Option<&'static str> = Some("nodes");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

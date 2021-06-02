@@ -62,9 +62,9 @@ impl crate::Resource for LocalSubjectAccessReview {
     const GROUP: &'static str = "authorization.k8s.io";
     const KIND: &'static str = "LocalSubjectAccessReview";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = ;
-    const NAMESPACED: bool = false;
-    type Scope = crate::ClusterResourceScope;
+    const PLURAL_NAME: Option<&'static str> = Some("localsubjectaccessreviews");
+    const NAMESPACED: bool = true;
+    type Scope = crate::NamespaceResourceScope;
 }
 
 impl crate::Metadata for LocalSubjectAccessReview {

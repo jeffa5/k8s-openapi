@@ -540,7 +540,7 @@ impl crate::Resource for StorageVersion {
     const GROUP: &'static str = "internal.apiserver.k8s.io";
     const KIND: &'static str = "StorageVersion";
     const VERSION: &'static str = "v1alpha1";
-    const PLURAL_NAME: &'static str = storageversions;
+    const PLURAL_NAME: Option<&'static str> = Some("storageversions");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

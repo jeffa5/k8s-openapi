@@ -374,7 +374,7 @@ impl crate::Resource for InitializerConfiguration {
     const GROUP: &'static str = "admissionregistration.k8s.io";
     const KIND: &'static str = "InitializerConfiguration";
     const VERSION: &'static str = "v1alpha1";
-    const PLURAL_NAME: &'static str = initializerconfigurations;
+    const PLURAL_NAME: Option<&'static str> = Some("initializerconfigurations");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

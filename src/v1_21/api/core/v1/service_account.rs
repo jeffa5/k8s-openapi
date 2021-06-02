@@ -484,7 +484,7 @@ impl crate::Resource for ServiceAccount {
     const GROUP: &'static str = "";
     const KIND: &'static str = "ServiceAccount";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = serviceaccounts;
+    const PLURAL_NAME: Option<&'static str> = Some("serviceaccounts");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }

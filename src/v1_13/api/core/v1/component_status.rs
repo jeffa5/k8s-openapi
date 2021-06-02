@@ -171,7 +171,7 @@ impl crate::Resource for ComponentStatus {
     const GROUP: &'static str = "";
     const KIND: &'static str = "ComponentStatus";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = componentstatuses;
+    const PLURAL_NAME: Option<&'static str> = Some("componentstatuses");
     const NAMESPACED: bool = false;
     type Scope = crate::ClusterResourceScope;
 }

@@ -598,9 +598,9 @@ impl crate::Resource for Scale {
     const GROUP: &'static str = "apps";
     const KIND: &'static str = "Scale";
     const VERSION: &'static str = "v1beta2";
-    const PLURAL_NAME: &'static str = ;
+    const PLURAL_NAME: Option<&'static str> = None;
     const NAMESPACED: bool = false;
-    type Scope = crate::ClusterResourceScope;
+    type Scope = crate::OtherResourceScope;
 }
 
 impl crate::Metadata for Scale {

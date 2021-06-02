@@ -673,7 +673,7 @@ impl crate::Resource for Job {
     const GROUP: &'static str = "batch";
     const KIND: &'static str = "Job";
     const VERSION: &'static str = "v1";
-    const PLURAL_NAME: &'static str = jobs;
+    const PLURAL_NAME: Option<&'static str> = Some("jobs");
     const NAMESPACED: bool = true;
     type Scope = crate::NamespaceResourceScope;
 }
